@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduzione</title>
+
+  <style>
+    :root {
+      --bg-top: #0f172a;
+      --bg-bottom: #1e293b;
+      --panel: rgba(15, 23, 42, 0.82);
+      --panel-border: rgba(148, 163, 184, 0.22);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #f97316;
+      --accent-strong: #ea580c;
+      --shadow: 0 24px 70px rgba(2, 6, 23, 0.45);
+      --overlay: rgba(2, 6, 23, 0.76);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(249, 115, 22, 0.25), transparent 30%),
+        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+    }
+
+    .card {
+      width: min(100%, 700px);
+      padding: 32px;
+      border-radius: 24px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    .actions {
+      margin-top: 30px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      box-shadow: 0 14px 30px rgba(234, 88, 12, 0.32);
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* MODAL */
+
+    .modal-layer {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: var(--overlay);
+    }
+
+    .modal-layer.visible {
+      display: flex;
+    }
+
+    .modal {
+      width: min(100%, 420px);
+      padding: 24px;
+      border-radius: 20px;
+      background: #111827;
+      text-align: center;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    .modal p {
+      color: var(--muted);
+    }
+
+    .modal button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+    <h1>Benvenuti</h1>
+
+    <p>
+      Benvenuti a questa particolare caccia al tesoro.
+      In questa caccia al tesoro ogni squadra dovrà risolvere gli indizi,
+      trovare l'immagine che corrisponde all'indizio con il relativo QR CODE e 
+      risolvere il gioco che verrà proposto.
+    </p>
+
+    <p>
+      Ogni squadra dovrà fare uno screenshot del livello completato.
+      La caccia al tesoro sarà conclusa solo una volta mostrato lo screenshot di ogni livello completato.
+    </p>
+
+    <p>
+      Ogni livello avrà un blocco di 10 minuti se chiudete la pagina, se cambiate schermata o se bloccate il telefono.
+      Quindi non cercate di barare, non serve a niente e rischiate solo di perdere tempo prezioso.
+    </p>
+
+    <p>
+      Consiglio di leggere sempre con attenzione le istruzioni di ogni livello, 
+      perché potrebbero essere nascoste informazioni importanti.
+    </p>
+
+    <p>
+      Se siete pronti, potete svelare il primo indizio e iniziare la caccia al tesoro!
+    </p>
+
+    <div class="actions">
+      <button id="reveal-btn">Svela indizio</button>
+    </div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-layer" id="modal">
+    <div class="modal">
+      <h2>Primo indizio</h2>
+      <p>
+        Più è alto, più deve tenere i piedi per terra.
+      </p>
+      <button id="close-modal">OK</button>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("reveal-btn");
+    const modal = document.getElementById("modal");
+    const close = document.getElementById("close-modal");
+
+    btn.addEventListener("click", () => {
+      modal.classList.add("visible");
+    });
+
+    close.addEventListener("click", () => {
+      modal.classList.remove("visible");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("visible");
+      }
+    });
+  </script>
+
+</body>
+</html>
